@@ -1,0 +1,139 @@
+unit U_Calculadora;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Layouts,
+  FMX.Controls.Presentation, FMX.StdCtrls, FMX.Edit;
+
+type
+  TForm1 = class(TForm)
+    btn_decimal: TButton;
+    btn_0: TButton;
+    btn_igual: TButton;
+    btn_divisao: TButton;
+    btn_7: TButton;
+    btn_8: TButton;
+    btn_9: TButton;
+    btn_multiplicacao: TButton;
+    btn_4: TButton;
+    btn_5: TButton;
+    btn_6: TButton;
+    btn_soma: TButton;
+    btn_1: TButton;
+    btn_2: TButton;
+    btn_3: TButton;
+    btn_subtracao: TButton;
+    caixa_botoes: TLayout;
+    caixa_topo: TLayout;
+    txt_num1: TEdit;
+    txt_num2: TEdit;
+    lb_operador: TLabel;
+    procedure btn_subtracaoClick(Sender: TObject);
+    procedure btn_somaClick(Sender: TObject);
+    procedure btn_multiplicacaoClick(Sender: TObject);
+    procedure btn_divisaoClick(Sender: TObject);
+    procedure btn_igualClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.fmx}
+
+procedure TForm1.btn_divisaoClick(Sender: TObject);
+begin
+  lb_operador.text := '/';
+  btn_multiplicacao.Enabled := true;
+  btn_soma.Enabled := true;
+  btn_subtracao.Enabled := true;
+  btn_divisao.Enabled := false;
+end;
+
+procedure TForm1.btn_igualClick(Sender: TObject);
+var n1, n2 : double;
+var x : char;
+begin
+  n1 := strToFloat(txt_num1.text);
+  n2 := strToFloat(txt_num2.text);
+
+  //realizando as operações com IF
+  //adição
+  {
+  if (lb_operador.Text = '+') then
+  begin
+    showmessage(FloatToStr(n1 + n2));
+  end;
+  //subtração
+  if (lb_operador.Text = '-') then
+  begin
+    showmessage(FloatToStr(n1 - n2));
+  end;
+  //multiplição
+  if (lb_operador.Text = 'x') then
+  begin
+    showmessage(FloatToStr(n1 * n2));
+  end;
+  //divisão
+  if (lb_operador.Text = '/') then
+  begin
+    showmessage(FloatToStr(n1 / n2));
+  end;                              }
+
+  //calculo das operações com switch
+  x := lb_operador.Text[1];
+  case x of
+    '+':
+      begin
+        showmessage(FloatToStr(n1 + n2));
+      end;
+    '-':
+      begin
+        showmessage(FloatToStr(n1 - n2));
+      end;
+    'x':
+      begin
+        showmessage(FloatToStr(n1 * n2));
+      end;
+    '/':
+      begin
+        showmessage(FloatToStr(n1 / n2));
+      end;
+  end;
+end;
+
+procedure TForm1.btn_multiplicacaoClick(Sender: TObject);
+begin
+  lb_operador.text := 'x';
+  btn_multiplicacao.Enabled := false;
+  btn_soma.Enabled := true;
+  btn_subtracao.Enabled := true;
+  btn_divisao.Enabled := true;
+end;
+
+procedure TForm1.btn_somaClick(Sender: TObject);
+begin
+  lb_operador.text := '+';
+  btn_multiplicacao.Enabled := true;
+  btn_soma.Enabled := false;
+  btn_subtracao.Enabled := true;
+  btn_divisao.Enabled := true;
+end;
+
+procedure TForm1.btn_subtracaoClick(Sender: TObject);
+begin
+  lb_operador.text := '-';
+  btn_multiplicacao.Enabled := true;
+  btn_soma.Enabled := true;
+  btn_subtracao.Enabled := false;
+  btn_divisao.Enabled := true;
+end;
+
+end.
